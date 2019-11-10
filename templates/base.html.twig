@@ -2,11 +2,17 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
     </head>
+
+        {% block stylesheets %}
+        	<link href="{{ asset('css/materialize.css') }}" rel="stylesheet" type="text/css"/>
+    	{% endblock %}
+
     <body>
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+
+        {% block javascripts %}
+            <script src="{{ asset('js/materialize.js') }}"></script>
+        {% endblock %}
     </body>
 </html>

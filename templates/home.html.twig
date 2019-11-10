@@ -1,8 +1,22 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+
+    {{ parent() }}
+
+{% endblock %}
+
 {% block body %}
+
+<body>
+    
     <h1>hello</h1>
-
     <h2>{{ zmienna }}</h2>
+    <a class="waves-effect waves-light btn">button</a>
 
+    {% block javascripts %}
+    	{{ parent() }}
+	{% endblock %}
+
+</body>
 {% endblock %}
