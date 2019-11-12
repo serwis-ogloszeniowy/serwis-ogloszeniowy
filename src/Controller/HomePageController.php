@@ -8,23 +8,26 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomePageController extends AbstractController
 {
     /**
-     * @Route("/", name="dupa")
+     * @Route("/", name="home")
      */
     public function index()
     {
-        $zmienna = 'witaj';
-
-        return $this->render('home.html.twig', ['zmienna' => $zmienna]);
+        return $this->render('home.html.twig');
     }
 
     /**
-     * @Route("/test", name="home")
+     * @Route("/register.html", name="register")
      */
-    public function test()
+    public function register()
     {
+        return $this->render('register.html.twig');
+    }
 
-        $zmienna = 'witaj';
-
-        return $this->render('home.html.twig', ['zmienna' => $zmienna]);
+    /**
+     * @Route("/login.html", name="login")
+     */
+    public function login()
+    {
+        return $this->render('login.html.twig');
     }
 }

@@ -1,22 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-
-    {{ parent() }}
-
-{% endblock %}
 
 {% block body %}
 
-<body>
-    
-    <h1>hello</h1>
-    <h2>{{ zmienna }}</h2>
-    <a class="waves-effect waves-light btn">button</a>
+      	<div class="container base-container">
+	        <blockquote class="right">
+	      	Jesteś niezalogowany
+	   		</blockquote>
+	   		<br/>
 
-    {% block javascripts %}
-    	{{ parent() }}
-	{% endblock %}
+	   		<h2 class="center">
+	   			Witaj!
+	   		</h2>
+	   		<h4 style="margin-top:50px;">
+	   			Szukasz dobrego miejsca, aby się ogłosić? Trafiłeś idealnie!
+	   		</h4>
 
-</body>
+
+    	</div>
+
 {% endblock %}

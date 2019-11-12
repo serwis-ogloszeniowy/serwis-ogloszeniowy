@@ -4,15 +4,68 @@
         <meta charset="UTF-8">
     </head>
 
-        {% block stylesheets %}
+{% block stylesheets %}
         	<link href="{{ asset('css/materialize.css') }}" rel="stylesheet" type="text/css"/>
-    	{% endblock %}
+        	<link href="{{ asset('css/base.css') }}" rel="stylesheet" type="text/css"/>
+        	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{% endblock %}
 
-    <body>
-        {% block body %}{% endblock %}
+    <body class="body">
+{% block navbar %}
 
-        {% block javascripts %}
+    	<!-- Dropdown Structure -->
+		<ul id="dropdown_profile" class="dropdown-content">
+		  <li><a href="#!">Profil</a></li>
+		  <li><a href="#!">Wyloguj</a></li>
+		</ul>
+		<nav>
+		  <div class="nav-wrapper base-wrapper">
+		    <a href="/" class="brand-logo">Serwis ogłoszeniowy Postex</a>
+		    <ul class="right hide-on-med-and-down">
+		      <li><a href="login.html">Logowanie</a></li>
+		      <li><a href="register.html">Rejestracja</a></li>
+		      <!-- Dropdown Trigger -->
+		      <li><a class="dropdown-trigger hide" href="#!" data-target="dropdown_profile">Imie i nazwisko<i class="material-icons right">arrow_drop_down</i></a></li>
+		    </ul>
+		  </div>
+		</nav>
+{% endblock %}
+
+{% block javascripts %}
+        	<script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
             <script src="{{ asset('js/materialize.js') }}"></script>
-        {% endblock %}
+            <script src="{{ asset('js/base.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+
+{% endblock %}
+
+{% block footer %}
+
+        <footer class="page-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Postex</h5>
+                <p class="grey-text text-lighten-4">Z nami ogłaszanie się jest jeszcze prostsze!</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Linki</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="#!">O nas</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Autorzy strony</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2019 Strona chroniona prawem autorskim
+            </div>
+          </div>
+        </footer>
+        	
+{% endblock %}
     </body>
 </html>
