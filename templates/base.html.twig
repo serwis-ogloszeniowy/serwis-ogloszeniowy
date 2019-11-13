@@ -22,8 +22,8 @@
 		  <div class="nav-wrapper base-wrapper">
 		    <a href="/" class="brand-logo">Serwis ogłoszeniowy Postex</a>
 		    <ul class="right hide-on-med-and-down">
-		      <li><a href="login.html">Logowanie</a></li>
-		      <li><a href="register.html">Rejestracja</a></li>
+		      <li><a href="{{ path('security_login') }}">Logowanie</a></li>
+		      <li><a href={{ path('user_register') }}>Rejestracja</a></li>
 		      <!-- Dropdown Trigger -->
 		      <li><a class="dropdown-trigger hide" href="#!" data-target="dropdown_profile">Imie i nazwisko<i class="material-icons right">arrow_drop_down</i></a></li>
 		    </ul>
