@@ -54,6 +54,7 @@ class RegisterController extends AbstractController
             $user->setLogin($form['login']);
             $user->setEmail($form['email']);
             $user->setPlainPassword($form['password']);
+            $user->setPhone($form['phone']);
 
             $password = $userPasswordEncoder->encodePassword($user, $user->getPlainPassword(
                 $user,
@@ -90,7 +91,8 @@ class RegisterController extends AbstractController
             !empty($form['surname']) &&
             !empty($form['login']) &&
             !empty($form['password']) &&
-            !empty($form['email']))
+            !empty($form['email']) &&
+            !empty($form['phone']))
         ) {
 
             return true;

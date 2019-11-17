@@ -53,6 +53,12 @@ padding: 0 0.75rem;
 	background-color: rgba(255, 0, 0, 0.2);
 }
 
+.Profile{
+	background-color: rgba(200, 100, 50, 0.2);
+	width:100%;
+
+}
+
 .Categories{
 	background-color: rgba(100, 100, 255, 0.2);
 	min-height:300px !important;
@@ -74,4 +80,26 @@ padding: 0 0.75rem;
 .categoryBlockquote{
 	display:inline-block;
 	width: 24%;
+}
+
+.file-field {
+	padding: 0 0.75rem;
+}
+
+.colw100 {
+	width:100%;
+	display:inline-block;
+}
+
+.colw100 .collection-item{
+	padding-right:30px;
+	padding-left:30px;
+}
+
+.collapsible-body{
+	background-color:#ffff;
+}
+
+.TabSingleAd{
+	background-color: rgba(0, 0, 255, 0.2);
 }

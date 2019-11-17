@@ -34,18 +34,18 @@ function checkPaginationVisibility($this){
 
 	if($this){
 		if( $this.children('a').attr('href') == '#test-swipe-2' ){
-			$('.pagination').removeClass('hide');
+			$('.pagination_home').removeClass('hide');
 		}
 		else {
-			$('.pagination').addClass('hide');	
+			$('.pagination_home').addClass('hide');	
 		}
 	}
 	else {
 		if($('.tab.col.s3 .active').attr('href') == '#test-swipe-2'){
-			$('.pagination').removeClass('hide');
+			$('.pagination_home').removeClass('hide');
 		}
 		else {
-			$('.pagination').addClass('hide');	
+			$('.pagination_home').addClass('hide');	
 		}	
 	}
 }
