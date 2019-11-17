@@ -4,19 +4,128 @@
 {% block body %}
 
       	<div class="container base-container">
-	        <blockquote class="right">
-	      	Jesteś niezalogowany
-	   		</blockquote>
-	   		<br/>
 
-	   		<h2 class="center">
-	   			Witaj!
-	   		</h2>
-	   		<h4 style="margin-top:50px;">
-	   			Szukasz dobrego miejsca, aby się ogłosić? Trafiłeś idealnie!
-	   		</h4>
+{% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
 
+        <blockquote class="right">
+      		Jesteś niezalogowany
+   		</blockquote>
+   		<br/>
 
-    	</div>
+   		<h2 class="center">
+   			Witaj!
+   		</h2>
+   		<h4 style="margin-top:50px; text-align:center;">
+   			Szukasz dobrego miejsca, aby się ogłosić? Trafiłeś idealnie!
+   		</h4>
+
+{% else %}
+
+<script src="{{ asset('js/baseExtended.js') }}"></script>
+
+<!-- Taby -->
+ <ul id="tabs-swipe-demo" class="tabs margin-topStandard">
+    <li class="tab col s3"><a class="active" href="#test-swipe-1">Ostatnie ogłoszenia</a></li>
+    <li class="tab col s3"><a href="#test-swipe-2">Wszystkie ogłoszenia</a></li>
+    <li class="tab col s3"><a href="#test-swipe-3">Kategorie</a></li>
+  </ul>
+
+  <!-- Ostatnie ogłoszenia -->
+  <div id="test-swipe-1" class="col s12 tabContent LastAds">
+
+<p style="clear:both; margin-left:20px;">
+Przeglądasz ostatnio dodane ogłoszenia
+</p>
+
+{% for i in 0..8 %}
+<!-- Karta -->
+<div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="images/office.jpg">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+      <p><a href="#">This is a link</a></p>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+      <p>Here is some more information about this product that is only revealed once clicked on.</p>
+    </div>
+  </div>
+<!--  -->
+{% endfor %}
+  </div>
+  <div id="test-swipe-2" class="col s12 tabContent AllAds">
+
+<!-- Wszystkie ogłoszenia -->
+
+<p style="clear:both; margin-left:20px;">
+Ogłoszenia z kategorii: 
+  <!-- Dropdown Trigger -->
+  <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Wszystkie</a>
+
+  <!-- Dropdown Structure -->
+  <ul id='dropdown1' class='dropdown-content'>
+    <li><a href="#!">one</a></li>
+    <li><a href="#!">two</a></li>
+    <li class="divider" tabindex="-1"></li>
+    <li><a href="#!">three</a></li>
+    <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
+    <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
+  </ul>
+</p>
+{% for i in 0..20 %}
+<!-- Karta -->
+<!--   <div class="row">
+    <div class="col s12 m7"> -->
+      <div class="card">
+        <div class="card-image">
+          <img src="images/office.jpg">
+          <span class="card-title">Card Title</span>
+        </div>
+        <div class="card-content">
+          <p>I am a very simple card. I am good at containing small bits of information.
+          I am convenient because I require little markup to use effectively.</p>
+        </div>
+        <div class="card-action">
+          <a href="#">This is a link</a>
+        </div>
+      </div>
+<!--     </div>
+  </div> -->
+<!--  -->
+{% endfor %}
+  
+<!-- Kategorie -->
+  </div>
+  <div id="test-swipe-3" class="col s12 tabContent Categories">
+
+{% for i in 0..15 %}
+    <blockquote class="categoryBlockquote truncate">
+      <a href="#">Nazwa kategorii</a>
+    </blockquote>
+{% endfor %}
+
+  </div>
+
+<!-- Paginacja -->
+  <ul class="pagination center hide">
+    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+    <li class="active"><a href="#!">1</a></li>
+    <li class="waves-effect"><a href="#!">2</a></li>
+    <li class="waves-effect"><a href="#!">3</a></li>
+    <li class="waves-effect"><a href="#!">4</a></li>
+    <li class="waves-effect"><a href="#!">5</a></li>
+    <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+  </ul>
+  <script>
+  $(document).ready(function(){
+    $('.tabs').tabs();
+  });
+  </script>
+
+{% endif %}
+
+</div>
 
 {% endblock %}

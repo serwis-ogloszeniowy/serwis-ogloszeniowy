@@ -4138,7 +4138,8 @@ $jscomp.polyfill = function (e, r, p, m) {
           }
         } else {
           if (this.$content.length) {
-            this.$content[0].style.display = 'block';
+            //modifed
+            this.$content[0].style.display = 'inline-table';
             this.$content.addClass('active');
             if (typeof this.options.onShow === 'function') {
               this.options.onShow.call(this, this.$content[0]);
@@ -7572,7 +7573,7 @@ $jscomp.polyfill = function (e, r, p, m) {
 })(cash, M.anime);
 ;(function ($, anim) {
   $(document).on('click', '.card', function (e) {
-    if ($(this).children('.card-reveal').length) {
+    if ($(this).children('.card-reveal').length) { 
       var $card = $(e.target).closest('.card');
       if ($card.data('initialOverflow') === undefined) {
         $card.data('initialOverflow', $card.css('overflow') === undefined ? '' : $card.css('overflow'));

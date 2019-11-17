@@ -1,6 +1,7 @@
 $(document).ready(function(){
 
 	$(".dropdown-trigger").dropdown();
+    $('select').formSelect();
 
 	CalculateHeight();
 
@@ -10,7 +11,7 @@ $(document).ready(function(){
 });
 
 function CalculateHeight(){
-	let height_safe = 300; 
+	let height_safe = 450; 
 	$('.base-container').css({'min-height': height_safe});
 	if($('.body').height()<$(window).height())
 	{

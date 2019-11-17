@@ -12,6 +12,17 @@ class HomePageController extends AbstractController
      */
     public function index()
     {
-        return $this->render('home.html.twig');
+    	$logged_in;
+    	if ($this->isGranted('ROLE_USER') == false) {
+    		$logged_in = 1;
+  		}
+  		else {
+  			$logged_in = 0;
+  		}
+  		return $this->render('home.html.twig', [
+  			'logged_in' => $logged_in,
+  		]);
+
     }
+
 }

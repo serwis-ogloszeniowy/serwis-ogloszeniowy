@@ -1,13 +1,10 @@
-.base-wrapper{
-	padding-left:20px;
-}
-
 .base-container{
 	min-height:500px;
 	
 }
 
 .container{
+	margin-top:10px;
 	width:80%;
 	max-width:unset !important;
 }
@@ -28,4 +25,53 @@ padding: 0 0.75rem;
 
 .page-footer{
 	margin-top:40px;
+}
+
+.margin-topStandard{
+	margin-top:40px;	
+}
+
+.tabs {
+	overflow-x:hidden;
+}
+
+.tabs .tab {
+	width:33.3%;
+}
+
+.tabs .tab a {
+	margin:0;
+	padding:0;
+}
+
+.tabContent {
+	padding:1%;
+	display: inline-table;
+}
+
+.LastAds{
+	background-color: rgba(255, 0, 0, 0.2);
+}
+
+.Categories{
+	background-color: rgba(100, 100, 255, 0.2);
+	min-height:300px !important;
+}
+
+.AllAds{
+	background-color: rgba(0, 0, 255, 0.2);
+}
+
+.card {
+	width: 30.5%;
+    height: 25%;
+    display: inline-grid;
+    margin:1.4%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.categoryBlockquote{
+	display:inline-block;
+	width: 24%;
 }

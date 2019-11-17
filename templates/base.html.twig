@@ -16,16 +16,17 @@
     	<!-- Dropdown Structure -->
 		<ul id="dropdown_profile" class="dropdown-content">
 		  <li><a href="#!">Profil</a></li>
-		  <li><a href="#!">Wyloguj</a></li>
+		  <li><a href="{{ path('security_logout') }}">Wyloguj</a></li>
 		</ul>
+
 		<nav>
 		  <div class="nav-wrapper base-wrapper">
-		    <a href="/" class="brand-logo">Serwis ogłoszeniowy Postex</a>
+		    <a href="/" class="brand-logo truncate">Serwis ogłoszeniowy Postex</a>
 		    <ul class="right hide-on-med-and-down">
 		      <li><a href="{{ path('security_login') }}">Logowanie</a></li>
 		      <li><a href={{ path('user_register') }}>Rejestracja</a></li>
 		      <!-- Dropdown Trigger -->
-		      <li><a class="dropdown-trigger hide" href="#!" data-target="dropdown_profile">Imie i nazwisko<i class="material-icons right">arrow_drop_down</i></a></li>
+		      <li><a class="dropdown-trigger hide" href="#!" data-target="dropdown_profile">{{ app.user.firstname }} {{ app.user.surname }}<i class="material-icons right">arrow_drop_down</i></a></li>
 		    </ul>
 		  </div>
 		</nav>
@@ -36,6 +37,19 @@
             <script src="{{ asset('js/materialize.js') }}"></script>
             <script src="{{ asset('js/base.js') }}"></script>
 {% endblock %}
+
+{% if is_granted('IS_AUTHENTICATED_FULLY') == true %}
+
+<script>
+  $('a[href="/login"').hide();
+  $('a[href="/register"').hide();
+  $('.dropdown-trigger').text();
+  $('.dropdown-trigger').removeClass('hide');
+</script>
+
+{% endif %}
+
+
 
 {% block body %}
 
@@ -53,8 +67,8 @@
               <div class="col l4 offset-l2 s12">
                 <h5 class="white-text">Linki</h5>
                 <ul>
-                  <li><a class="grey-text text-lighten-3" href="#!">O nas</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Autorzy strony</a></li>
+                  <li><a class="grey-text text-lighten-3" href="/aboutus">O nas</a></li>
+                  <li><a class="grey-text text-lighten-3" href="/authors">Autorzy strony</a></li>
                 </ul>
               </div>
             </div>

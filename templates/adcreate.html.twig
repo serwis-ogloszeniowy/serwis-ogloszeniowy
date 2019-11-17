@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+      	<div class="container base-container">
+	   		<br/>
+
+	   		<h2 class="left padding-standard">
+	   			Stwórz ogłoszenie
+	   		</h2>
+	   		<br>
+	   		<h6 style="margin-top:50px; clear:both;" class="padding-standard">
+	   			Wypełnij pola:
+	   		</h6>
+
+	   		 <div class="row">
+			    <form class="col s12" action="{{ path('save_user') }}" method="POST">
+			      <div class="row">
+			        <div class="input-field col s6">
+			          <input name="title" id="title" type="text" class="validate">
+			          <label for="title">Tytuł, bądź temat ogłoszenia</label>
+			        </div>
+			      </div>
+
+				  <div class="row">
+			        <div class="col s12">
+		                <textarea id="description" class="materialize-textarea"></textarea>
+          				<label for="description">Opis</label>
+					</div>
+	              </div>
+
+	              <div class="row" style="margin-top:50px;">
+  			        <div class="col s3">
+			        	<label style = "margin-right:20px;">Kategoria:</label>
+						  <!-- Dropdown Trigger -->
+						  <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Wszystkie</a>
+
+						  <!-- Dropdown Structure -->
+						  <ul id='dropdown1' class='dropdown-content'>
+						    <li><a href="#!">one</a></li>
+						    <li><a href="#!">two</a></li>
+						    <li class="divider" tabindex="-1"></li>
+						    <li><a href="#!">three</a></li>
+						    <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
+						    <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
+						  </ul>
+			         </div>
+			        </div>
+			
+			      <div class="row" style="margin-top:50px;">
+					<div class="file-field input-field">
+					      <div class="btn">
+					        <span>Załącz obrazki</span>
+					        <input type="file">
+					      </div>
+					      <div class="file-path-wrapper">
+					        <input class="file-path validate" type="text">
+					      </div>
+				    </div>
+			      </div>
+
+			      </div>
+			      <div class="row">
+			        <div class="col s6" style = "padding:0px;">
+						<button class="btn waves-effect waves-light" type="submit" name="action">Stwórz ogłoszenie
+							<i class="material-icons right">send</i> </button>
+					</div>
+	              </div>
+	              </form>
+            </div>
+          		      
+        </div>
+
+{% endblock %}
