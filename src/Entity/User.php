@@ -58,6 +58,28 @@ class User implements UserInterface, \Serializable
     private $phone;
 
     /**
+     * @ORM\Column(type="string", nullable=false)
+     * @Assert\Count(min=9, max=9, minMessage="You must add 9 digits")
+     */
+    private $role;
+
+    /**
+     * @return mixed
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param mixed $role
+     */
+    public function setRole($role): void
+    {
+        $this->role = $role;
+    }
+
+    /**
      * @Assert\NotBlank()
      * @Assert\Length(min=5, max=4096)
      */

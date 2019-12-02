@@ -55,6 +55,7 @@ class RegisterController extends AbstractController
             $user->setEmail($form['email']);
             $user->setPlainPassword($form['password']);
             $user->setPhone($form['phone']);
+            $user->setRole('USER');
 
             $password = $userPasswordEncoder->encodePassword($user, $user->getPlainPassword(
                 $user,
