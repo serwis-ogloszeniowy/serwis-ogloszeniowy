@@ -13,52 +13,36 @@
 	   		<h6 style="margin-top:50px; clear:both;" class="padding-standard">
 	   			Wypełnij pola:
 	   		</h6>
-
-	   		 <div class="row">
-			    <form class="col s12" action="{{ path('save_user') }}" method="POST">
-			      <div class="row">
-			        <div class="input-field col s6">
-			          <input name="firstname" id="first_name" type="text" class="validate">
-			          <label for="first_name">Imię</label>
-			        </div>
-			        <div class="input-field col s6">
-			          <input name="surname" id="last_name" type="text" class="validate">
-			          <label for="last_name">Nazwisko</label>
-			        </div>
-			      </div>
-			
-			      <div class="row">
-			        <div class="input-field col s6">
-			          <input name="login" id="login" type="text" class="validate">
-			          <label for="password">Login</label>
-			        </div>
-
-			        <div class="input-field col s6">
-			          <input name="password" id="password" type="password" class="validate">
-			          <label for="password">Hasło</label>
-			        </div>
-			      </div>
+				<div class="row">
+					{{ form_start(form) }}
 					<div class="row">
 						<div class="input-field col s6">
-							<input name="email" id="email" type="email" class="validate">
-							<label for="email">Email</label>
+							{{ form_row(form.firstname) }}
 						</div>
-							<div class="input-field col s6">
-							<input name="phone" id="phone" type="text" class="validate">
-							<label for="phone">Telefon</label>
+						<div class="input-field col s6">
+							{{ form_row(form.surname) }}
 						</div>
 					</div>
-
-
-			      <div class="row">
-			        <div class="col s6">
-						<button class="btn waves-effect waves-light" type="submit" name="action">Zarejestruj
-							<i class="material-icons right">send</i> </button>
+					<div class="row">
+						<div class="input-field col s6">
+							{{ form_row(form.login) }}
+						</div>
+						<div class="input-field col s6">
+							{{ form_row(form.plainPassword) }}
+						</div>
 					</div>
-	              </div>
-	              </form>
-            </div>
-          		      
+					<div class="row">
+						<div class="input-field col s6">
+							{{ form_row(form.email) }}
+						</div>
+						<div class="input-field col s6">
+							{{ form_row(form.phone) }}
+					</div>
+				</div>
+			</div>
+			<button class="btn waves-effect waves-light">Zapisz <i class="material-icons right">send</i></button>
+			{{ form_end(form) }}
+			
   	      	{% for message in app.flashes('notice') %}
 				<div class="flash-notice padding-standard">
 					{{ message }}

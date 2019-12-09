@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Form\CategoryType;
+use App\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,84 +24,47 @@ class RegisterController extends AbstractController
     /**
      * @Route("/register", name="user_register")
      */
-    public function register()
-    {
-        return $this->render('register.html.twig');
-    }
-
-    /**
-     * @Route("/user/save", name="save_user")
-     */
-    public function saveUser(Request $request, UserPasswordEncoderInterface $userPasswordEncoder)
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         $user = new User();
 
-        $form = $request->request->all();
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
 
-        if ($this->validateRequest($form) === true
-            && $this->checkIfUserExists($form['login'], $form['email']) === true
-        ) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
-            if (filter_var($form['email'], FILTER_VALIDATE_EMAIL) === false) {
+            if ($this->checkIfUserExists(
+                    $form->get('login')->getData(),
+                    $form->get('email')->getData())
+                == false
+            ) {
                 $this->addFlash(
                     'notice',
-                    'Nieprawidłowy format adresu email'
+                    'Konto o danym loginie bądź haśle już istnieje'
                 );
-                
+
                 return $this->redirectToRoute('user_register');
             }
 
-            $user->setFirstname($form['firstname']);
-            $user->setSurname($form['surname']);
-            $user->setLogin($form['login']);
-            $user->setEmail($form['email']);
-            $user->setPlainPassword($form['password']);
-            $user->setPhone($form['phone']);
-            $user->setRole('USER');
-
-            $password = $userPasswordEncoder->encodePassword($user, $user->getPlainPassword(
+            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword(
                 $user,
                 $user->getPlainPassword()
             ));
 
             $user->setPassword($password);
-        }
+            $user->setRole('USER');
+            $user->setDateOfRegistration(new \DateTime());
 
-        try {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash(
-                'notice',
-                'Konto zostało utworzone!'
-            );
-
-        } catch (\Exception $e) {
-            $this->addFlash(
-                'notice',
-                'Nieprawidłowe dane w formularzu bądź konto z podanym adresem email lub loginem już istnieje'
-            );
-        }
-        return $this->redirectToRoute('user_register');
-    }
-
-    public function validateRequest(array $formRequest): bool
-    {
-        $form = $formRequest;
-
-        if (!empty($form['firstname'] &&
-            !empty($form['surname']) &&
-            !empty($form['login']) &&
-            !empty($form['password']) &&
-            !empty($form['email']) &&
-            !empty($form['phone']))
-        ) {
-
-            return true;
+            return $this->redirectToRoute('home');
         }
 
-        return false;
+        return $this->render('register.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     public function checkIfUserExists(string $login, string $email): bool

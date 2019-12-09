@@ -4,9 +4,11 @@ declare(strict_types = 1);
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use App\Validator as CustomAssert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -21,23 +23,40 @@ class User implements UserInterface, \Serializable
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=59)
      * @Assert\NotBlank()
-     * @Assert\Length(min=2, max=50)
+     * @Assert\Length(
+     *     min=2,
+     *     max=22,
+     *     minMessage="Imię musi zawierać co najmniej 2 znaki",
+     *     maxMessage="Imię może zawierać maksymalnie 22 znaki"
+     *     )
+     * @CustomAssert\Name
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank()
-     * @Assert\Length(min=2, max=50)
+     * @Assert\Length(
+     *     min=2,
+     *     max=50,
+     *     minMessage="Nazwisko musi zawierać co najmniej 2 znaki",
+     *     minMessage="Login musi zawierać co najmniej 22 znaki",
+     *     )
+     * @CustomAssert\Name
      */
     private $surname;
 
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank()
-     * @Assert\Length(min=5, max=20)
+     * @Assert\Length(
+     *     min=3,
+     *      max=20,
+     *     minMessage="Login musi zawierać co najmniej 3 znaki",
+     *     maxMessage="Login może zawierać maksymalnie 20 znaków"
+     *     )
      */
     private $login;
 
@@ -48,20 +67,45 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Email(
+     *     message = "Podaj poprawny adres email"
+     * )
      */
     private $email;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Count(min=9, max=9, minMessage="You must add 9 digits")
+     * @ORM\Column(type="string", nullable=true)
+     * @CustomAssert\Phone
      */
     private $phone;
 
     /**
      * @ORM\Column(type="string", nullable=false)
-     * @Assert\Count(min=9, max=9, minMessage="You must add 9 digits")
      */
     private $role;
+
+    /**
+     * @ORM\Column(type="date", nullable=false)
+     */
+    private $dateOfRegistration;
+
+    /**
+     * @Assert\Length(min=5, max=4096, minMessage="Hasło musi zawierać co najmniej 5 znaków")
+     */
+    private $plainPassword;
+
+    private $oldPassword;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Auction", mappedBy="user", cascade={"persist"})
+     */
+    private $auctions;
+
+    public function __construct()
+    {
+        $this->auctions = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -78,14 +122,6 @@ class User implements UserInterface, \Serializable
     {
         $this->role = $role;
     }
-
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Length(min=5, max=4096)
-     */
-    private $plainPassword;
-    
-    private $oldPassword;
 
     public function getId(): ?int
     {
@@ -152,19 +188,19 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getPhone(): ?int
+    public function getPhone(): ?string
     {
         return $this->phone;
     }
 
-    public function setPhone(?int $phone): self
+    public function setPhone(string $phone): self
     {
         $this->phone = $phone;
 
         return $this;
     }
-    
-    public function getPlainPassword(): string
+
+    public function getPlainPassword(): ?string
     {
         return $this->plainPassword;
     }
@@ -174,7 +210,7 @@ class User implements UserInterface, \Serializable
         $this->plainPassword = $plainPassword;
     }
 
-    public function getOldPassword(): string
+    public function getOldPassword(): ?string
     {
         return $this->oldPassword;
     }
@@ -220,5 +256,37 @@ class User implements UserInterface, \Serializable
     public function eraseCredentials()
     {
         unset($this->plainPassword);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateOfRegistration()
+    {
+        return $this->dateOfRegistration;
+    }
+
+    /**
+     * @param mixed $dateOfRegistration
+     */
+    public function setDateOfRegistration($dateOfRegistration): void
+    {
+        $this->dateOfRegistration = $dateOfRegistration;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getAuctions(): ArrayCollection
+    {
+        return $this->auctions;
+    }
+
+    /**
+     * @param ArrayCollection $auctions
+     */
+    public function setAuctions(ArrayCollection $auctions): void
+    {
+        $this->auctions = $auctions;
     }
 }
