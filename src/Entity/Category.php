@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
@@ -30,6 +31,16 @@ class Category
      * @ORM\Column(type="date", nullable=true)
      */
     private $date_of_creation;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Auction", mappedBy="category")
+     */
+    private $auctions;
+
+    public function __construct()
+    {
+        $this->auctions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -70,5 +81,21 @@ class Category
         $this->date_of_creation = $date_of_creation;
 
         return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getAuctions(): ArrayCollection
+    {
+        return $this->auctions;
+    }
+
+    /**
+     * @param ArrayCollection $auctions
+     */
+    public function setAuctions(ArrayCollection $auctions): void
+    {
+        $this->auctions = $auctions;
     }
 }

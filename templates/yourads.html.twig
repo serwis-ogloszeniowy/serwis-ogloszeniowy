@@ -35,19 +35,21 @@
 Przeglądasz swoje ogłoszenia
 </p>
 
-{% for i in 0..8 %}
+{% for auction in auctions  %}
 <!-- Karta -->
 <div class="card">
+
     <div class="card-image waves-effect waves-block waves-light">
-      <img class="activator" src="images/office.jpg">
+            <img class="activator" src="{{ asset(auction.getFirstImage) }}" width="300" height="400">
     </div>
     <div class="card-content">
-      <span class="card-title activator grey-text text-darken-4">Tytuł<i class="material-icons right">more_vert</i></span>
+      <span class="card-title activator grey-text text-darken-4">{{ auction.title }}<i class="material-icons right">more_vert</i></span>
       <p><a href="#">Usuń</a></p>
+        <a href="{{ path('yourads_edit', {'id': auction.id}) }}"><button class="btn btn-info">Edytuj</button></a>
     </div>
     <div class="card-reveal">
       <span class="card-title grey-text text-darken-4">Tytuł<i class="material-icons right">close</i></span>
-      <p>Here is some more information about this product that is only revealed once clicked on.</p>
+      <p>{{ auction.description }}</p>
     </div>
   </div>
 <!--  -->

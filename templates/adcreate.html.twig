@@ -15,55 +15,49 @@
 	   		</h6>
 
 	   		 <div class="row">
-			    <form class="col s12" action="{{ path('save_user') }}" method="POST">
+
+			    {{ form_start(form) }}
 			      <div class="row">
 			        <div class="input-field col s6">
-			          <input name="title" id="title" type="text" class="validate">
-			          <label for="title">Tytuł, bądź temat ogłoszenia</label>
+			          {{ form_row(form.title) }}
 			        </div>
 			      </div>
 
 				  <div class="row">
 			        <div class="col s12">
-		                <textarea id="description" class="materialize-textarea"></textarea>
-          				<label for="description">Opis</label>
+		                {{ form_row(form.description) }}
 					</div>
 	              </div>
 
 	              <div class="row" style="margin-top:50px;">
   			        <div class="col s4">
 					  <div class="input-field col s12" style="padding:0px;">
-					    <select multiple>
-					      <option value="" disabled selected>Wybierz kategorię</option>
-					      <option value="1">Option 1</option>
-					      <option value="2">Option 2</option>
-					      <option value="3">Option 3</option>
-					    </select>
-					    <label style="padding:0px; left:0px;">Kategoria</label>
+						  {{ form_row(form.category) }}
 					  </div>
 			         </div>
 			        </div>
-			
+				 <div class="row">
+				 	<div class="col s4">
+						<div class="input-field col s12">
+							{{ form_row(form.price) }}
+						</div>
+					</div>
+				 </div>
+
 			      <div class="row" style="margin-top:50px;">
 					<div class="file-field input-field">
 					      <div class="btn">
 					        <span>Załącz obrazki</span>
-					        <input type="file">
+							  {{ form_row(form.images) }}
 					      </div>
 					      <div class="file-path-wrapper">
-					        <input class="file-path validate" type="text">
+							  <input class="file-path validate" type="text">
 					      </div>
 				    </div>
 			      </div>
 
 			      </div>
-			      <div class="row">
-			        <div class="col s6 " style = "padding:0 0.75rem;">
-						<button class="btn waves-effect waves-light" type="submit" name="action">Stwórz ogłoszenie
-							<i class="material-icons right">send</i> </button>
-					</div>
-	              </div>
-	              </form>
+	              {{ form_end(form) }}
             </div>
           		      
         </div>

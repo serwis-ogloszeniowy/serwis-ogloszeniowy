@@ -12,7 +12,7 @@ class HomePageController extends AbstractController
      */
     public function index()
     {
-    	$logged_in;
+    	$logged_in = 0;
     	if ($this->isGranted('ROLE_USER') == false) {
     		$logged_in = 1;
   		}

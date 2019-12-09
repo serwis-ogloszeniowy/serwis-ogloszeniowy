@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+    <div class="container base-container">
+        <br/>
+
+        <h2 class="left padding-standard">
+            Stwórz ogłoszenie
+        </h2>
+        <br>
+        <h6 style="margin-top:50px; clear:both;" class="padding-standard">
+            Wypełnij pola:
+        </h6>
+
+        <div class="row">
+
+            {{ form_start(form) }}
+            <div class="row">
+                <div class="input-field col s6">
+                    {{ form_row(form.title) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12">
+                    {{ form_row(form.description) }}
+                </div>
+            </div>
+
+            <div class="row" style="margin-top:50px;">
+                <div class="col s4">
+                    <div class="input-field col s12" style="padding:0px;">
+                        {{ form_row(form.category) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s4">
+                    <div class="input-field col s12">
+                        {{ form_row(form.price) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top:50px;">
+                <div class="file-field input-field">
+                    <div class="btn">
+                        <span>Załącz obrazki</span>
+                        {{ form_row(form.images) }}
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        {{ form_end(form) }}
+    </div>
+
+    </div>
+
+{% endblock %}

@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AuctionRepository")
@@ -45,7 +47,22 @@ class Auction
      * @ORM\ManyToOne(targetEntity="User", inversedBy="auctions")
      */
     private $user;
-    
+
+    /**
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="auction", cascade={"persist"})
+     */
+    private $images;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="auctions")
+     */
+    private $category;
+
+    public function __construct()
+    {
+        $this->images = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,7 +92,7 @@ class Auction
         return $this;
     }
     
-    public function getPrice(): int 
+    public function getPrice(): ?int
     {
         return $this->price;
     }
@@ -123,5 +140,54 @@ class Auction
     public function setUser($user): void
     {
         $this->user = $user;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getImages(): ArrayCollection
+    {
+        return $this->images;
+    }
+    
+    public function setImages($images): void
+    {
+        $this->images[] = $images;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param mixed $category
+     */
+    public function setCategory($category): void
+    {
+        $this->category = $category;
+    }
+
+    public function getImagesArray()
+    {
+        $ar = [];
+
+        foreach ($this->images as $image)
+        {
+            $ar[] =$image;
+        }
+
+        return $ar;
+    }
+
+    public function getFirstImage()
+    {
+        foreach ($this->images as $image) {
+           return $image->getPath();
+        }
+        return null;
     }
 }

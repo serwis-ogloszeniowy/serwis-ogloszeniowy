@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Auction;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -18,6 +19,16 @@ class AuctionRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Auction::class);
     }
+
+    public function getAllAuctions(User $user)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.user = :id')
+            ->setParameter('id', $user->getId())
+            ->orderBy('p.title', 'ASC')
+            ->getQuery()->getResult();
+    }
+
 
     // /**
     //  * @return Auction[] Returns an array of Auction objects
