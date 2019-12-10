@@ -29,7 +29,7 @@
   </ul>
 
   <!-- Ostatnie ogłoszenia -->
-  <div id="test-swipe-1" class="col s12 tabContent LastAds">
+  <div id="test-swipe-1" class="col s12 tabContent LastAds" style="min-width:100%">
 
 <p style="clear:both; margin-left:20px;">
 Przeglądasz swoje ogłoszenia
@@ -48,7 +48,7 @@ Przeglądasz swoje ogłoszenia
         <a href="{{ path('yourads_edit', {'id': auction.id}) }}"><button class="btn btn-info">Edytuj</button></a>
     </div>
     <div class="card-reveal">
-      <span class="card-title grey-text text-darken-4">Tytuł<i class="material-icons right">close</i></span>
+      <span class="card-title grey-text text-darken-4">{{ auction.title }}<i class="material-icons right">close</i></span>
       <p>{{ auction.description }}</p>
     </div>
   </div>

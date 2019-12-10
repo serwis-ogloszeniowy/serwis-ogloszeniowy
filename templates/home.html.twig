@@ -95,9 +95,9 @@ Przeglądasz ostatnio dodane ogłoszenia
   </div>
   <div id="test-swipe-3" class="col s12 tabContent Categories">
 
-{% for i in 0..15 %}
+{% for category in categories %}
     <blockquote class="categoryBlockquote truncate">
-      <a href="#">Nazwa kategorii</a>
+      <a href="#">{{ category.name }}</a>
     </blockquote>
 {% endfor %}
 

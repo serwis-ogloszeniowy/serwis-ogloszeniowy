@@ -10,11 +10,18 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Validator\Constraints\Image;
 
 class AuctionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+//        $imageConstraints = [
+//            new Image([
+//                'maxSize' => '5M'
+//            ])
+//        ];
+
         $builder
             ->add('title', TextType::class, [
                 'label' => 'Tytuł'
@@ -35,11 +42,15 @@ class AuctionType extends AbstractType
                 'choice_label' => 'name'
             ])
             ->add('images', FileType::class, [
-                'multiple' => true,
+            //    'attr' => [
+            //        'multiple' => true
+            //    ],
+                'multiple' => false,
                 'label' => 'Zdjęcia',
                 'mapped' => false,
                 'data_class' => null,
                 'required' => true,
+          //      'constraints' => $imageConstraints
             ])
             ->add('Stwórz ogłoszenie', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-success form-button-custom']

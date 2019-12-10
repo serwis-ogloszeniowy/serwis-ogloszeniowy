@@ -55,7 +55,6 @@ class YourAds extends AbstractController
                $image = new Image();
 
                $filename = md5(uniqid()).'.'.$file->guessClientExtension();
-
                $image->setFilename($filename);
                $image->setPath('/asset/images/'. $filename);
 

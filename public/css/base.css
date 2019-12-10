@@ -3,6 +3,10 @@
 	
 }
 
+.tabContent{
+	min-width:100%;
+}
+
 .container{
 	margin-top:10px;
 	width:80%;
