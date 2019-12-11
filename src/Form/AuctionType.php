@@ -45,7 +45,7 @@ class AuctionType extends AbstractType
             //    'attr' => [
             //        'multiple' => true
             //    ],
-                'multiple' => false,
+                'multiple' => true,
                 'label' => 'Zdjęcia',
                 'mapped' => false,
                 'data_class' => null,

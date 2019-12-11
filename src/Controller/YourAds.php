@@ -13,6 +13,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 class YourAds extends AbstractController
 {
+    private const LOGIN = 'ftpuser';
+    private const PASSWORD = 'changeme';
+    private const FTP_SERVER = 'apache_zdjecia';
+    private const SERVER_DESTINATION = '/var/www/html/ftpuser/images/';
+    private const HOST_NAME = 'http://fotki.com:3381/images/';
 
     protected $auctionRepository;
 
@@ -48,20 +53,30 @@ class YourAds extends AbstractController
        $form->handleRequest($request);
 
        if ($form->isSubmitted() && $form->isValid()) {
+
+           try {
+               $conId = ftp_connect(self::FTP_SERVER);
+               ftp_pasv($conId, true);
+               $login_result = ftp_login($conId, self::LOGIN, self::PASSWORD);
+
+           } catch(\Exception $e) {
+               $e->getMessage();
+           }
+           
            $files = $request->files->get('auction')['images'];
 
            /** @var UploadedFile */
            foreach ($files as $file) {
+
                $image = new Image();
 
                $filename = md5(uniqid()).'.'.$file->guessClientExtension();
                $image->setFilename($filename);
-               $image->setPath('/asset/images/'. $filename);
+               $image->setPath(self::HOST_NAME. $filename);
 
-               $file->move($this->getParameter('image_directory'), $filename);
-
+               $upload = ftp_put($conId, self::SERVER_DESTINATION.basename($filename), $file, FTP_IMAGE);
+               
                $image->setAuction($auction);
-
                $image->setDateOfCreation(new \DateTime());
                $image->setDateOfLastModification(new \DateTime());
                $image->setMainImage(0);

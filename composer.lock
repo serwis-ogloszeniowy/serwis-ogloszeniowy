@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3a697e7f61c34c3a448285cd883d48cf",
+    "content-hash": "2acb3f399bae2af0a2720dc443893d2e",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1467,6 +1467,55 @@
                 "psr-3"
             ],
             "time": "2019-09-06T13:49:17+00:00"
+        },
+        {
+            "name": "nicolab/php-ftp-client",
+            "version": "v1.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Nicolab/php-ftp-client.git",
+                "reference": "8c66e1104da1b638f5d7a9e24624a5525b459a0c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Nicolab/php-ftp-client/zipball/8c66e1104da1b638f5d7a9e24624a5525b459a0c",
+                "reference": "8c66e1104da1b638f5d7a9e24624a5525b459a0c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ftp": "*",
+                "php": ">=5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "FtpClient": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Tallefourtane",
+                    "email": "dev@nicolab.net",
+                    "homepage": "http://nicolab.net"
+                }
+            ],
+            "description": "A flexible FTP and SSL-FTP client for PHP. This lib provides helpers easy to use to manage the remote files.",
+            "homepage": "https://github.com/Nicolab/php-ftp-client",
+            "keywords": [
+                "file",
+                "ftp",
+                "helper",
+                "lib",
+                "server",
+                "sftp",
+                "ssl",
+                "ssl-ftp"
+            ],
+            "time": "2019-04-23T09:22:37+00:00"
         },
         {
             "name": "ocramius/package-versions",
