@@ -3,11 +3,11 @@
 
 {% block body %}
 
-      	<div class="container base-container">
+<div class="container base-container">
 
 {% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
 
-        <blockquote class="right">
+      <blockquote class="right">
       		Jesteś niezalogowany
    		</blockquote>
    		<br/>
@@ -22,6 +22,7 @@
 {% else %}
 
 <script src="{{ asset('js/baseExtended.js') }}"></script>
+
 
 <!-- Taby -->
  <ul id="tabs-swipe-demo" class="tabs margin-topStandard">
@@ -46,14 +47,27 @@
     </div>
   </div>
 
-
-<div class="carousel">
-    <a class="carousel-item" href="#one!"><img src="https://lorempixel.com/250/250/nature/1"></a>
-    <a class="carousel-item" href="#two!"><img src="https://lorempixel.com/250/250/nature/2"></a>
-    <a class="carousel-item" href="#three!"><img src="https://lorempixel.com/250/250/nature/3"></a>
-    <a class="carousel-item" href="#four!"><img src="https://lorempixel.com/250/250/nature/4"></a>
-    <a class="carousel-item" href="#five!"><img src="https://lorempixel.com/250/250/nature/5"></a>
-</div>
+<div id="slider" class="slider">
+    <div class="slider-item active" style="background-image: url(https://source.unsplash.com/aiBYhrzsQw4/1920x1200)"></div>
+    <div class="slider-item" style="background-image: url(https://source.unsplash.com/V5Owjg-ZNto/1920x1200)"></div>
+    <div class="slider-item" style="background-image: url(https://source.unsplash.com/s1ihVBg5tbI/1920x1200)"></div>
+    <div class="slider-item" style="background-image: url(https://source.unsplash.com/Z_t6gnbLmXA/1920x1200)"></div>
+    <div class="slider-item" style="background-image: url(https://source.unsplash.com/e3OUQGT9bWU/1920x1200)"></div>
+    <div class="slider-panel">
+      <div class="slider-panel__navigation">
+        <i class="fas fa-circle indicator active" data-slide-to="0"></i>
+        <i class="far fa-circle indicator" data-slide-to="1"></i>
+        <i class="far fa-circle indicator" data-slide-to="2"></i>
+        <i class="far fa-circle indicator" data-slide-to="3"></i>
+        <i class="far fa-circle indicator" data-slide-to="4"></i>
+      </div>
+      <div class="slider-panel__controls">
+        <i class="far fa-arrow-alt-circle-left" id="previous"></i>
+        <i class="far fa-pause-circle" id="pause-play"></i>
+        <i class="far fa-arrow-alt-circle-right" id="next"></i>
+      </div>
+    </div>
+  </div>
 
 <div class="collection">
     <a href="#!" class="collection-item"><span class="badge">Nazwa kategorii</span>Kategoria</a>
@@ -61,18 +75,15 @@
     <a href="#!" class="collection-item"><span class="badge">XXXXX@mail.com</span>Email</a>
   </div>
 
-
-
   </div>
-  
   <script>
   $(document).ready(function(){
     $('.tabs').tabs();
   });
-$(document).ready(function(){
-    $('.carousel').carousel();
-  });
   </script>
+
+
+<script src="{{ asset('js/main.js') }}"></script>
 
 {% endif %}
 

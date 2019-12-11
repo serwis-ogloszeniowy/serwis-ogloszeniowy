@@ -103,3 +103,7 @@ padding: 0 0.75rem;
 .TabSingleAd{
 	background-color: rgba(0, 0, 255, 0.2);
 }
+
+.tabContent{
+	width:100%;
+}
