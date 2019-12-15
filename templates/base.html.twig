@@ -8,14 +8,15 @@
         	<link href="{{ asset('css/materialize.css') }}" rel="stylesheet" type="text/css"/>
         	<link href="{{ asset('css/base.css') }}" rel="stylesheet" type="text/css"/>
         	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+          <link href="{{ asset('css/image-uploader.min.css') }}" rel="stylesheet" type="text/css"/>
+          <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css"/>
+          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 {% endblock %}
 
     <body class="body">
 {% block navbar %}
 
-
-
-    	<!-- Dropdown Structure -->
+    <!-- Dropdown Structure -->
 		<ul id="dropdown_profile" class="dropdown-content">
 		  <li><a href="{{ path('yourads') }}">Twoje ogłoszenia</a></li>
 		  <li><a href="/profile">Profil</a></li>
@@ -42,6 +43,8 @@
         	<script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
             <script src="{{ asset('js/materialize.js') }}"></script>
             <script src="{{ asset('js/base.js') }}"></script>
+            <script src="{{ asset('js/image-uploader.js') }}"></script>
+          
 {% endblock %}
 
 {% if is_granted('IS_AUTHENTICATED_FULLY') == true %}
@@ -54,8 +57,6 @@
 </script>
 
 {% endif %}
-
-
 
 {% block body %}
 

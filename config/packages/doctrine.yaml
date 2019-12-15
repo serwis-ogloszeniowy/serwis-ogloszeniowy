@@ -6,7 +6,7 @@ doctrine:
         driver: 'mysql'
         server_version: '5.7'
         dbname: serwis_ogloszeniowy
-        host: serwis_ogloszeniowy-database
+        host: localhost
         port: 3306
         user: root
         password: root
@@ -16,7 +16,7 @@ doctrine:
             charset: utf8mb4
             collate: utf8mb4_unicode_ci
 
-        url: mysql://root:root@serwis_ogloszeniowy-database:3306/serwis_ogloszeniowy
+        url: mysql://root:@localhost:3306/serwis_ogloszeniowy
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore

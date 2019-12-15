@@ -41,17 +41,13 @@ class AuctionType extends AbstractType
                 },
                 'choice_label' => 'name'
             ])
-            ->add('images', FileType::class, [
-            //    'attr' => [
-            //        'multiple' => true
-            //    ],
-                'multiple' => true,
-                'label' => 'Zdjęcia',
-                'mapped' => false,
-                'data_class' => null,
-                'required' => true,
-          //      'constraints' => $imageConstraints
-            ])
+            // ->add('images', FileType::class, [
+            //     'multiple' => true,
+            //     'label' => 'Zdjęcia',
+            //     'mapped' => false,
+            //     'data_class' => null,
+            //     'required' => true,
+            // ])
             ->add('Stwórz ogłoszenie', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-success form-button-custom']
             ])
