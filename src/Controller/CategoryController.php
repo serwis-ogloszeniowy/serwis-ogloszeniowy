@@ -31,7 +31,9 @@ class CategoryController extends AbstractController
      */
     public function index()
     {
-        return $this->render('category/category_management.html.twig');
+        return $this->render('category/category_management.html.twig',[
+            'categories' => $this->categoryRepository->findAll()
+        ]);
     }
 
     /**
@@ -40,7 +42,7 @@ class CategoryController extends AbstractController
     public function new(Request $request): Response
     {
         $category = new Category();
-
+              
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
@@ -50,7 +52,7 @@ class CategoryController extends AbstractController
 
             if(!empty($this->categoryRepository->getByName($requestData['name']))){
                 $this->addFlash(
-                    'notice',
+                    'category',
                     'Kategoria o tej nazwie już istnieje'
                 );
 
@@ -64,7 +66,7 @@ class CategoryController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash(
-                'notice',
+                'category',
                 'Kategoria została utworzona'
             );
         }
@@ -72,5 +74,48 @@ class CategoryController extends AbstractController
         return $this->render('category/new.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/{id}/edit", name="category_edit")
+     */
+    public function edit(Request $request, Category $category)
+    {
+        $form = $this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($category);
+            $entityManager->flush();
+
+            $this->addFlash(
+                'category',
+                'Kategoria została zaaktualizowana'
+            );
+
+            return $this->redirectToRoute('category_index');
+        }
+
+        return $this->render('category/edit.html.twig', [
+            'category' => $category,
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/delete", name="category_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Category $category)
+    {
+        if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
+            
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($category);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('category_index');
     }
 }

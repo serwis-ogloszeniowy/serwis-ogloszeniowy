@@ -19,6 +19,7 @@ class YourAds extends AbstractController
     private const FTP_SERVER = 'apache_zdjecia';
     private const SERVER_DESTINATION = '/var/www/html/ftpuser/images/';
     private const HOST_NAME = 'http://fotki.com:3381/images/';
+    public const IMAGE__EXTENSIONS = ['jpg', 'jpeg', 'gif', 'png'];
 
     protected $auctionRepository;
     protected $logger;
@@ -50,6 +51,9 @@ class YourAds extends AbstractController
      */
     public function addAuction(Request $request)
     {
+
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $auction = new Auction();
 
         $form = $this->createForm(AuctionType::class, $auction);
@@ -74,6 +78,17 @@ class YourAds extends AbstractController
 
                 $image = new Image();
                 $filename = md5(uniqid()) . '.' . $file->guessClientExtension();
+
+                if (!in_array($file->guessClientExtension(), self::IMAGE__EXTENSIONS)) {
+
+                    $this->addFlash(
+                        'notice',
+                        'Nie poprawny format zdjęcia'
+                    );
+
+                    return $this->redirectToRoute('yourads_new');
+                }
+
                 $image->setFilename($filename);
                 $image->setPath(self::HOST_NAME . $filename);
                 $upload = ftp_put($conId, self::SERVER_DESTINATION . basename($filename), $file, FTP_IMAGE);
@@ -93,7 +108,7 @@ class YourAds extends AbstractController
 
             $this->addFlash(
                 'notice',
-                'SUCCESS'
+                'Udało się dodać ogłoszenie'
             );
 
             return $this->redirectToRoute('yourads');
@@ -105,10 +120,24 @@ class YourAds extends AbstractController
     }
 
     /**
+     * @Route("/yourads/{id}/show", name="ad_show")
+     */
+    public function show(Auction $auction, Request $request)
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
+        return $this->render('singlead.html.twig', [
+            'auction' => $auction
+        ]);
+    }
+
+    /**
      * @Route("/yourads/{id}/edit", name="yourads_edit")
      */
     public function editAuction(Request $request, Auction $auction)
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $form = $this->createForm(AuctionType::class, $auction);
         $form->handleRequest($request);
 
@@ -144,6 +173,11 @@ class YourAds extends AbstractController
             $entityManager->persist($auction);
             $entityManager->flush();
 
+            $this->addFlash(
+                'notice',
+                'Udało się edytować ogłoszenie'
+            );
+
             return $this->redirectToRoute('yourads', [
                 'id' => $auction->getId(),
             ]);
@@ -160,21 +194,36 @@ class YourAds extends AbstractController
      */
     public function deleteImage(Request $request, Auction $auction)
     {
-        $datas = $request->request->get('insert_delete');
+        $this->denyAccessUnlessGranted('ROLE_USER');
 
-        $entityManager = $this->getDoctrine()->getManager();
+            $datas = $request->request->get('insert_delete');
 
-        foreach ($auction->getImagesArray() as $key => $image) {
-            if ($image->getId($key) == $datas) {
-                $entityManager->remove($image);
-                $entityManager->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+
+            foreach ($auction->getImagesArray() as $key => $image) {
+                if ($image->getId($key) == $datas) {
+                    $entityManager->remove($image);
+                    $entityManager->flush();
+                }
             }
-        }
 
         return $this->json(['data' => 'Udało się usunąć zdjęcie']);
-        //return $this->redirectToRoute('yourads_edit');
+    }
 
-//        $this->logger->debug(print_r($request->request->all(), true));
-//        die;
+    /**
+     * @Route("/yourads/{id}/delete_auction", name="auction_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Auction $auction)
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
+        if ($this->isCsrfTokenValid('delete'.$auction->getId(), $request->request->get('_token'))) {
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($auction);
+            $entityManager->flush();
+        }
+
+       return $this->redirectToRoute('yourads');
     }
 }

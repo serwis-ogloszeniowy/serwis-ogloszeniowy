@@ -190,4 +190,19 @@ class Auction
         }
         return null;
     }
+
+    public function getCategoryName()
+    {
+        return $this->category->getName();
+    }
+
+    public function getUserPhoneNumber()
+    {
+        return $this->user->getPhone();
+    }
+
+    public function getUserEmail()
+    {
+        return $this->user->getEmail();
+    }
 }

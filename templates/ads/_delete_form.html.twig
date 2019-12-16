@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('auction_delete', {'id': auction.id}) }}" onsubmit="return confirm('Jesteś pewny że chcesz usunąć ogłoszenie?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ auction.id) }}">
+    <button class="btn btn-danger back-to-list-button">Usuń ogłoszenie</button>
+</form>

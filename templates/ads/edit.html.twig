@@ -55,18 +55,25 @@
             <ul class="listitems" id="list-items">
                 {% for image in auction.images %}
                     <li id="list" data-index="{{ image.id }}">
-                        <img src="{{ asset(image.path)}}" height="100" width="100" />
+                        <img src="{{ asset(image.path) }}" height="100" width="100"/>
                         <label>
-                            <input id="indeterminate-checkbox" class="get_value" type="checkbox" value="{{ image.id }}" />
+                            <input id="indeterminate-checkbox" class="get_value" type="checkbox"
+                                   value="{{ image.id }}"/>
                             <span>Indeterminate Style</span>
                         </label>
                     </li>
                 {% endfor %}
             </ul>
-            <p><button type="button" name="submit-delete" id="submit-delete">Delete image</button></p>
+            <p>
+                <a class="waves-effect waves-light btn deleteButton" name="submit-delete" id="submit-delete">Usuń zdjęcie</a>
+            </p>
         </div>
         {{ form_widget(form.save, {'label': 'Aktualizuj ogłoszenie'}) }}
         {{ form_end(form) }}
+
+        <div style="margin-top: 20px" class="row">
+            {{ include('ads/_delete_form.html.twig') }}
+        </div>
     </div>
 
     </div>
@@ -76,8 +83,7 @@
             $('#submit-delete').click(function () {
                 var insert_delete = [];
                 $('.get_value').each(function () {
-                    if($(this).is(":checked"))
-                    {
+                    if ($(this).is(":checked")) {
                         insert_delete.push($(this).val());
                     }
                 });
@@ -86,7 +92,7 @@
                 $.ajax({
                     url: "{{ path('image_delete', {'id': auction.id}) }}",
                     method: "POST",
-                    data: {insert_delete : insert_delete},
+                    data: {insert_delete: insert_delete},
                     async: true,
 
                     success: function ($data) {

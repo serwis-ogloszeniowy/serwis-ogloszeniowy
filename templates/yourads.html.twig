@@ -40,11 +40,14 @@ Przeglądasz swoje ogłoszenia
 <div class="card">
 
     <div class="card-image waves-effect waves-block waves-light">
+        {% if auction.getFirstImage == null %}
+            <img src="http://fotki.com:3381/images/placeholder.jpg">
+        {% else %}
             <img class="activator" src="{{ asset(auction.getFirstImage) }}" width="300" height="400">
+        {% endif %}
     </div>
     <div class="card-content">
       <span class="card-title activator grey-text text-darken-4">{{ auction.title }}<i class="material-icons right">more_vert</i></span>
-      <p><a href="#">Usuń</a></p>
         <a href="{{ path('yourads_edit', {'id': auction.id}) }}"><button class="btn btn-info">Edytuj</button></a>
     </div>
     <div class="card-reveal">
@@ -55,18 +58,6 @@ Przeglądasz swoje ogłoszenia
 <!--  -->
 {% endfor %}
   </div>
-  
-
-<!-- Paginacja -->
-  <ul class="pagination center pagination_yourads">
-    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-    <li class="active"><a href="#!">1</a></li>
-    <li class="waves-effect"><a href="#!">2</a></li>
-    <li class="waves-effect"><a href="#!">3</a></li>
-    <li class="waves-effect"><a href="#!">4</a></li>
-    <li class="waves-effect"><a href="#!">5</a></li>
-    <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-  </ul>
   <script>
   $(document).ready(function(){
     $('.tabs').tabs();

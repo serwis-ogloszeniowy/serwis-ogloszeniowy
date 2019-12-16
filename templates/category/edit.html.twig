@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div class="container base-container">
+        <div class="row">
+
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn waves-effect waves-light">Zapisz <i class="material-icons right">send</i></button>
+        {{ form_end(form) }}
+        </div>
+        <div class="row">
+            {{ include('category/_delete_form.html.twig') }}
+        </div>
+    </div>
+
+{% endblock %}

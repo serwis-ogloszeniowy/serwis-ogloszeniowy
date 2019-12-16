@@ -25,8 +25,17 @@ class AuctionRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->andWhere('p.user = :id')
             ->setParameter('id', $user->getId())
-            ->orderBy('p.title', 'ASC')
+            ->orderBy('p.title', 'DESC')
             ->getQuery()->getResult();
+    }
+
+    public function getLatestAuctions()
+    {
+        return $this->createQueryBuilder('p')
+            ->setMaxResults(9)
+            ->orderBy('p.id', 'DESC')
+            ->getQuery()
+            ->getResult();
     }
 
 

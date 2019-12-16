@@ -20,8 +20,10 @@
 		<ul id="dropdown_profile" class="dropdown-content">
 		  <li><a href="{{ path('yourads') }}">Twoje ogłoszenia</a></li>
 		  <li><a href="/profile">Profil</a></li>
-            <li><a href="{{ path('category_index') }}">Kategorie</a></li>
-		  <li><a href="{{ path('security_logout') }}">Wyloguj</a></li>
+            {% if is_granted('ROLE_ADMIN') %}
+                <li><a href="{{ path('category_index') }}">Kategorie</a></li>
+            {% endif %}
+            <li><a href="{{ path('security_logout') }}">Wyloguj</a></li>
 		</ul>
 
 		<nav>
@@ -29,7 +31,9 @@
 		    <a href="/" class="brand-logo truncate">Serwis ogłoszeniowy Postex</a>
 		    <ul class="right hide-on-med-and-down">
 		    <li> <a href="/">Strona główna</a></li>
-		    <li><a href="{{ path('yourads_new') }}">Stwórz ogłoszenie</a></li>
+		        {% if is_granted('ROLE_USER') %}
+                <li><a href="{{ path('yourads_new') }}">Stwórz ogłoszenie</a></li>
+                 {% endif %}
 		      <li><a href="{{ path('security_login') }}">Logowanie</a></li>
 		      <li><a href={{ path('user_register') }}>Rejestracja</a></li>
 		      <!-- Dropdown Trigger -->

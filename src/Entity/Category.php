@@ -33,7 +33,7 @@ class Category
     private $date_of_creation;
 
     /**
-     * @ORM\OneToMany(targetEntity="Auction", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="Auction", mappedBy="category", orphanRemoval=true)
      */
     private $auctions;
 
@@ -86,7 +86,7 @@ class Category
     /**
      * @return ArrayCollection
      */
-    public function getAuctions(): ArrayCollection
+    public function getAuctions()
     {
         return $this->auctions;
     }

@@ -37,59 +37,49 @@
 Przeglądasz ostatnio dodane ogłoszenia
 </p>
 
-{% for i in 0..8 %}
-<!-- Karta -->
+    {% for nauction in newestAuctions %}
 <div class="card">
     <div class="card-image waves-effect waves-block waves-light">
-      <img class="activator" src="images/office.jpg">
+        {% if nauction.getFirstImage == null %}
+            <img src="http://fotki.com:3381/images/placeholder.jpg">
+        {% else %}
+            <img src="{{ asset(nauction.getFirstImage) }}">
+        {% endif %}
     </div>
     <div class="card-content">
-      <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-      <p><a href="/singlead">Link</a></p>
+      <span class="card-title activator grey-text text-darken-4">{{ nauction.title }}<i class="material-icons right">more_vert</i></span>
+      <p><a href="{{ path('ad_show', {'id' : nauction.id}) }}">Zobacz ogłoszenie!</a></p>
     </div>
     <div class="card-reveal">
-      <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-      <p>Here is some more information about this product that is only revealed once clicked on.</p>
+      <span class="card-title grey-text text-darken-4">{{ nauction.title }}<i class="material-icons right">close</i></span>
+      <p>{{ nauction.description }}</p>
     </div>
   </div>
-<!--  -->
-{% endfor %}
+    {% endfor %}
   </div>
   <div id="test-swipe-2" class="col s12 tabContent AllAds">
 
 <!-- Wszystkie ogłoszenia -->
-
-  <div class="input-field col s12" style = "padding:20px 20px 0px 20px;">
-    <select>
-      <option value="" disabled selected>Wybierz kategorię</option>
-      <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
-      <option value="3">Option 3</option>
-    </select>
-    <label style = "padding:20px;left:0px;">Ogłoszenia z kategorii:</label>
-  </div>
-
-{% for i in 0..20 %}
 <!-- Karta -->
-<!--   <div class="row">
-    <div class="col s12 m7"> -->
-      <div class="card">
+    {% for auction in auctions %}
+    <div class="card">
         <div class="card-image">
-          <img src="images/office.jpg">
-          <span class="card-title">Card Title</span>
+            {% if auction.getFirstImage == null %}
+                <img src="http://fotki.com:3381/images/placeholder.jpg">
+            {% else %}
+                <img src="{{ asset(auction.getFirstImage) }}">
+                {% endif %}
+          <span class="card-title">{{ auction.title }}</span>
         </div>
         <div class="card-content">
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
+          <p>{{ auction.description }}</p>
         </div>
         <div class="card-action">
-          <a href="/singlead">Link</a>
+          <a href="{{ path('ad_show', {'id' : auction.id}) }}">Zobacz ogłoszenie!</a>
         </div>
       </div>
-<!--     </div>
-  </div> -->
-<!--  -->
-{% endfor %}
+    {% endfor %}
+
   
 <!-- Kategorie -->
   </div>
@@ -102,17 +92,7 @@ Przeglądasz ostatnio dodane ogłoszenia
 {% endfor %}
 
   </div>
-
-<!-- Paginacja -->
-  <ul class="pagination center hide pagination_home">
-    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-    <li class="active"><a href="#!">1</a></li>
-    <li class="waves-effect"><a href="#!">2</a></li>
-    <li class="waves-effect"><a href="#!">3</a></li>
-    <li class="waves-effect"><a href="#!">4</a></li>
-    <li class="waves-effect"><a href="#!">5</a></li>
-    <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-  </ul>
+    
   <script>
   $(document).ready(function(){
     $('.tabs').tabs();
