@@ -52,7 +52,7 @@ class RegisterController extends AbstractController
             ));
 
             $user->setPassword($password);
-            $user->setRole('USER');
+            $user->setRole('ROLE_USER');
             $user->setDateOfRegistration(new \DateTime());
 
             $entityManager = $this->getDoctrine()->getManager();
