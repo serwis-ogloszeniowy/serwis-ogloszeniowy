@@ -9,7 +9,6 @@ ponadto użytkownik może obejrzeć ogłoszenia innych użytkowników.
   - Edycja swoich ogłoszeń
 - Administrator:
   - Zarządzanie kategoriami ogłoszeń
-  - Przeglądanie obecnie aktywnych ogłoszeń
  
  
  ![](https://github.com/serwis-ogloszeniowy/serwis-ogloszeniowy/blob/master/doc_images/1.PNG)
