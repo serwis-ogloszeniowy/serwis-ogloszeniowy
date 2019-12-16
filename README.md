@@ -39,6 +39,27 @@ W związku z niedoskonałością wbudowanych rozwiązań oferowanych przez frame
 - adres e-mail - Adres musi zawierać znak '@'
 - numer telefonu - Numer musi składać się z dziewięciu cyfr
 ## Instalacja projektu
+Oprogramowanie potrzebne do włączenia projektu:
+- docker
+- docker-compose
+
+UWAGA!
+Poniższa konfiguracja działa tylko dla systemów z rodziny Linux.
+
+Opis instalacji projektu:
+1. Utworzyć folder z projektem.
+2. W folderze projektu utworzyć folder “www” oraz “docker”.
+2. Sklonować repozytorium do folderu “www”.
+3. Skopiować zawartość folderu “projekt/www/docker” do folderu “projekt/docker”.
+5. W pliku docker-compose.yml ustawić prawidłowe ścieżki dla plików konfiguracyjnych znajdujących się w folderze “projekt/docker” (plik docker-compose.yml sekcja volumes w konfiguracjach kontenerów “serwis_ogloszeniowy”, “apache_zdjecia”, “database”).
+6. Z poziomu folderu “projekt/docker” w konsoli wpisać polecenie “docker-compose up”.
+7. Poczekać aż obrazy dla kontenerów dockera się załadują.
+8. Włączyć drugą konsolę I wpisać polecenie “docker exec -it serwis_ogloszeniowy bash”.
+9. Wpisać polecenie “bin/console doctrine:migrations:migrate”.
+10. Włączyć nową konsole I wpisać polecenie “docker exec -it apache_zdjecia bash”.
+11. W tej samej konsoli wpisać “/etc/init.d/apache2 restart”.
+12. Wejść dodać vhosta w głównym systemie. W przypadku ubuntu należy otworzyć plik  /etc/hosts z prawami administratora. W tym pliku należy dodać linijkę “127.0.0.1 serwis-ogloszeniowy.local”.
+
 ## Schematy UML
 ### Diagram przypadków użycia:
 ![](https://github.com/serwis-ogloszeniowy/serwis-ogloszeniowy/blob/master/doc_images/5.PNG)
