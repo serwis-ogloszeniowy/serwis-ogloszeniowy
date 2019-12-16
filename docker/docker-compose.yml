@@ -1,0 +1,57 @@
+version: '3.5'
+ 
+services:
+  serwis_ogloszeniowy:
+    container_name: 'serwis_ogloszeniowy'
+    build:
+      context: ./webserver
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    volumes:
+      - /home/mateusz/Sites/serwis_ogloszeniowy/www:/var/www/html
+      - /home/mateusz/Sites/serwis_ogloszeniowy/docker/webserver/conf/php.ini:/usr/local/etc/php/php.ini
+      - /home/mateusz/Sites/docker/vhosts/serwis-ogloszeniowy.local.conf:/etc/apache2/sites-enabled/serwis-ogloszeniowy.local.conf
+    networks:
+      - serwis_ogloszeniowy
+  
+  apache_zdjecia:
+    container_name: 'apache_zdjecia'
+    build:
+      context: ./httpd
+      dockerfile: Dockerfile
+    ports:
+      - 3381:3381
+      - 20-21:20-21
+      - 65500-65515:65500-65515
+    tty: true
+    volumes:
+      - /home/mateusz/Sites/docker/vhosts/fotki.com.conf:/etc/apache2/sites-enabled/fotki.com.conf
+      - /home/mateusz/Sites/serwis_ogloszeniowy/docker/httpd/ports.conf:/etc/apache2/ports.conf
+      - /home/mateusz/Sites/serwis_ogloszeniowy/images:/var/www/html/ftpuser/images
+    networks:
+      - serwis_ogloszeniowy
+ 
+  database:
+      container_name: 'serwis_ogloszeniowy-database'
+      build:
+        context: ./database
+        dockerfile: Dockerfile
+      ports:
+            - "3306:3306"
+      volumes:
+          - /home/mateusz/Sites/serwis_ogloszeniowy/docker/db/mysql:/var/lib/mysql
+          - /home/mateusz/Sites/serwis_ogloszeniowy/docker/dbdumps:/dbdumps
+      environment:
+          TZ: "Europe/Warsaw"
+          MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+          MYSQL_ROOT_PASSWORD: "root"
+          MYSQL_USER: 'mateusz'
+          MYSQL_PASSWORD: 'mateusz987'
+          MYSQL_DATABASE: 'serwis_ogloszeniowy'
+      networks:
+          - serwis_ogloszeniowy
+networks:
+  serwis_ogloszeniowy:
+    name: serwis_ogloszeniowy
+    driver: bridge
