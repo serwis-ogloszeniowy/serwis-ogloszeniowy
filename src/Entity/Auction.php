@@ -49,7 +49,7 @@ class Auction
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="Image", mappedBy="auction", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="auction", cascade={"persist"}, fetch="EAGER")
      */
     private $images;
 
@@ -145,7 +145,7 @@ class Auction
     /**
      * @return ArrayCollection
      */
-    public function getImages(): ArrayCollection
+    public function getImages()
     {
         return $this->images;
     }

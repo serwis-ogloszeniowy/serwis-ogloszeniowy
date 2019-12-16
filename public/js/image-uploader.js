@@ -8,7 +8,7 @@
         // Default settings
         let defaults = {
             preloaded: [],
-            imagesInputName: 'images',
+            imagesInputName: 'auction_images',
             preloadedInputName: 'preloaded',
             label: 'Drag & Drop files here or click to browse',
             extensions: ['.jpg', '.jpeg', '.png', '.gif', '.svg'],

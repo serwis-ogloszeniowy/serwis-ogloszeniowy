@@ -1,0 +1,45 @@
+<div class="row">
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="input-field col s6">
+            {{ form_row(form.title) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12">
+            {{ form_row(form.description) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            {{ form_row(form.category) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s4">
+            <div class="input-field col s12">
+                {{ form_row(form.price) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top:50px;">
+        <div class="file-field input-field">
+            <div class="btn">
+                <span>Załącz obrazki</span>
+                {{ form_row(form.images) }}
+            </div>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+            </div>
+        </div>
+    </div>
+    <div style="margin-top: 60px" class="row">
+        <button class="btn btn-success form-button-custom">{{ button_label|default('Save') }}</button>
+    </div>
+    {{ form_end(form) }}
+</div>
+
+
+

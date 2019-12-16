@@ -45,11 +45,21 @@
 						</div>
 					</div>
 				 </div>
+				 <div class="row" style="margin-top:50px;">
+					 <div class="file-field input-field">
+						 <div class="btn">
+							 <span>Załącz obrazki</span>
+{#							 <input type="file" multiple>#}
+							 {{ form_row(form.images) }}
 
-			      <div class="input-images">
-
-			      </div>
-
+						 </div>
+						 <div class="file-path-wrapper">
+{#							 {{ form_row(form.images) }}#}
+							 <input class="file-path validate" type="text">
+						 </div>
+					 </div>
+				 </div>
+				 {{ form_widget(form.save, {'label': 'Dodaj ogłoszenie'}) }}
 			      </div>
 	              {{ form_end(form) }}
             </div>
