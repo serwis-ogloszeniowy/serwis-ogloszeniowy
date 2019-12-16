@@ -42,11 +42,21 @@
   </div>
 
     <div id="slider" class="slider">
+        {% set foo = 0 %}
         {% for image in auction.getImagesArray %}
-        <div class="slider-item active" style="background-image: url({{ image.path }})"></div>
+            {% if foo == 0  %}
+            <div class="slider-item active" style="background-image: url({{ image.path }})"></div>
+            {% set foo = 1 %}
+                {% else %}
+                    <div class="slider-item" style="background-image: url({{ image.path }})"></div>
+            {% endif %}
+        {% endfor %}
         <div class="slider-panel">
             <div class="slider-panel__navigation">
-                <i class="fas fa-circle indicator active" data-slide-to="{{ image.id }}"></i>
+             
+                {% for image in range (0, auction.countImages) %}
+                <i class="fas fa-circle indicator " data-slide-to="{{ image }}"></i>
+                {% endfor %}
             </div>
             <div class="slider-panel__controls">
                 <i class="far fa-arrow-alt-circle-left" id="previous"></i>
@@ -54,7 +64,7 @@
                 <i class="far fa-arrow-alt-circle-right" id="next"></i>
             </div>
         </div>
-        {% endfor %}
+
     </div>
 
 <div class="collection">

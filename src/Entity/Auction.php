@@ -205,4 +205,14 @@ class Auction
     {
         return $this->user->getEmail();
     }
+
+    public function countImages()
+    {
+        $i = -1;
+
+        foreach ($this->getImages() as $image) {
+               $i++;
+        }
+        return $i;
+    }
 }
