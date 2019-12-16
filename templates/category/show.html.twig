@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+<div class="container base-container">
+
+    {% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
+
+    <blockquote class="right">
+        Jesteś niezalogowany
+    </blockquote>
+    <br/>
+
+    <h2 class="center">
+        Witaj!
+    </h2>
+    <h4 style="margin-top:50px; text-align:center;">
+        Szukasz dobrego miejsca, aby się ogłosić? Trafiłeś idealnie!
+    </h4>
+
+    {% else %}
+
+    <script src="{{ asset('js/baseExtended.js') }}"></script>
+
+    <!-- Wszystkie ogłoszenia -->
+    <!-- Karta -->
+    {% for auction in category.getAuctions %}
+        <div class="card">
+            <div class="card-image">
+                {% if auction.getFirstImage == null %}
+                    <img src="http://fotki.com:3381/images/placeholder.jpg">
+                {% else %}
+                    <img src="{{ asset(auction.getFirstImage) }}">
+                {% endif %}
+                <span class="card-title">{{ auction.title }}</span>
+            </div>
+            <div class="card-content">
+                <p>{{ auction.description }}</p>
+            </div>
+            <div class="card-action">
+                <a href="{{ path('ad_show', {'id' : auction.id}) }}">Zobacz ogłoszenie!</a>
+            </div>
+        </div>
+    {% endfor %}
+
+    {% endif %}
+</div>
+    <script>
+        $(document).ready(function(){
+            $('.tabs').tabs();
+        });
+    </script>
+{% endblock %}

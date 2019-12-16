@@ -87,7 +87,7 @@ Przeglądasz ostatnio dodane ogłoszenia
 
 {% for category in categories %}
     <blockquote class="categoryBlockquote truncate">
-      <a href="#">{{ category.name }}</a>
+      <a href="{{ path('show_category', {'id' : category.id}) }}">{{ category.name }}</a>
     </blockquote>
 {% endfor %}
 

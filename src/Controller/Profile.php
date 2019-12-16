@@ -30,6 +30,8 @@ class Profile extends AbstractController
      */
     public function index(Request $request)
     {
+        $this->denyAccessUnlessGranted(['ROLE_USER', 'ROLE_ADMIN']);
+
         $this->user = $this->getUser();
 
         $formChangePassword = $this->createForm(ChangePasswordType::class, $this->user);

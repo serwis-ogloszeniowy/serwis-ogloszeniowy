@@ -31,6 +31,8 @@ class CategoryController extends AbstractController
      */
     public function index()
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         return $this->render('category/category_management.html.twig',[
             'categories' => $this->categoryRepository->findAll()
         ]);
@@ -41,6 +43,8 @@ class CategoryController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        
         $category = new Category();
               
         $form = $this->createForm(CategoryType::class, $category);
@@ -69,6 +73,8 @@ class CategoryController extends AbstractController
                 'category',
                 'Kategoria została utworzona'
             );
+
+            return $this->redirectToRoute('category_index');
         }
 
         return $this->render('category/new.html.twig', [
@@ -81,6 +87,8 @@ class CategoryController extends AbstractController
      */
     public function edit(Request $request, Category $category)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
@@ -105,10 +113,24 @@ class CategoryController extends AbstractController
     }
 
     /**
+     * @Route("/{id}/show", name="show_category")
+     */
+    public function show(Request $request, Category $category)
+    {
+        $this->denyAccessUnlessGranted(['ROLE_USER', 'ROLE_ADMIN']);
+
+        return $this->render('category/show.html.twig', [
+            'category' => $category
+        ]);
+    }
+
+    /**
      * @Route("/{id}/delete", name="category_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Category $category)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
             
             $entityManager = $this->getDoctrine()->getManager();

@@ -31,7 +31,7 @@
 		    <a href="/" class="brand-logo truncate">Serwis ogłoszeniowy Postex</a>
 		    <ul class="right hide-on-med-and-down">
 		    <li> <a href="/">Strona główna</a></li>
-		        {% if is_granted('ROLE_USER') %}
+		        {% if is_granted(['ROLE_USER', 'ROLE_ADMIN']) %}
                 <li><a href="{{ path('yourads_new') }}">Stwórz ogłoszenie</a></li>
                  {% endif %}
 		      <li><a href="{{ path('security_login') }}">Logowanie</a></li>

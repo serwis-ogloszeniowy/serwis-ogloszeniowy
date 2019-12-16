@@ -16,17 +16,17 @@ class ChangePasswordType extends AbstractType
     {
         $builder
             ->add('oldPassword', PasswordType::class, [
-                'label' => 'Old password',
+                'label' => 'Stare hasło',
                 'attr' => array('class' => 'form-control')
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'first_options' => [
-                    'label' => 'Password',
+                    'label' => 'Nowe hasło',
                     'attr' => array('class' => 'form-control'
                     )],
                 'second_options' => [
-                    'label' => 'Repated password',
+                    'label' => 'Powtórz hasło',
                     'attr' => array('class' => 'form-control'
                     )],
             ])

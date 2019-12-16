@@ -52,7 +52,7 @@ class YourAds extends AbstractController
     public function addAuction(Request $request)
     {
 
-        $this->denyAccessUnlessGranted('ROLE_USER');
+        $this->denyAccessUnlessGranted(['ROLE_USER', 'ROLE_ADMIN']);
 
         $auction = new Auction();
 
@@ -124,7 +124,7 @@ class YourAds extends AbstractController
      */
     public function show(Auction $auction, Request $request)
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
+        $this->denyAccessUnlessGranted(['ROLE_USER', 'ROLE_ADMIN']);
 
         return $this->render('singlead.html.twig', [
             'auction' => $auction
@@ -136,7 +136,7 @@ class YourAds extends AbstractController
      */
     public function editAuction(Request $request, Auction $auction)
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
+        $this->denyAccessUnlessGranted(['ROLE_USER', 'ROLE_ADMIN']);
 
         $form = $this->createForm(AuctionType::class, $auction);
         $form->handleRequest($request);
@@ -156,6 +156,16 @@ class YourAds extends AbstractController
 
             /** @var UploadedFile */
             foreach ($files as $file) {
+
+                if (!in_array($file->guessClientExtension(), self::IMAGE__EXTENSIONS)) {
+
+                    $this->addFlash(
+                        'notice',
+                        'Nie poprawny format zdjęcia'
+                    );
+
+                    return $this->redirectToRoute('yourads_new');
+                }
 
                 $image = new Image();
                 $filename = md5(uniqid()) . '.' . $file->guessClientExtension();
@@ -194,19 +204,29 @@ class YourAds extends AbstractController
      */
     public function deleteImage(Request $request, Auction $auction)
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
+        $this->denyAccessUnlessGranted(['ROLE_USER', 'ROLE_ADMIN']);
 
+        try {
+            $conId = ftp_connect(self::FTP_SERVER);
+            ftp_pasv($conId, true);
+            $login_result = ftp_login($conId, self::LOGIN, self::PASSWORD);
+
+        } catch (\Exception $e) {
+            $e->getMessage();
+        }
+        
             $datas = $request->request->get('insert_delete');
 
             $entityManager = $this->getDoctrine()->getManager();
 
             foreach ($auction->getImagesArray() as $key => $image) {
                 if ($image->getId($key) == $datas) {
+                    ftp_delete($conId, self::SERVER_DESTINATION.basename($image->getFilename()));
                     $entityManager->remove($image);
                     $entityManager->flush();
                 }
             }
-
+        
         return $this->json(['data' => 'Udało się usunąć zdjęcie']);
     }
 
@@ -215,11 +235,26 @@ class YourAds extends AbstractController
      */
     public function delete(Request $request, Auction $auction)
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
+        $this->denyAccessUnlessGranted(['ROLE_USER', 'ROLE_ADMIN']);
 
         if ($this->isCsrfTokenValid('delete'.$auction->getId(), $request->request->get('_token'))) {
 
+            try {
+                $conId = ftp_connect(self::FTP_SERVER);
+                ftp_pasv($conId, true);
+                $login_result = ftp_login($conId, self::LOGIN, self::PASSWORD);
+
+            } catch (\Exception $e) {
+                $e->getMessage();
+            }
+
             $entityManager = $this->getDoctrine()->getManager();
+            
+             foreach ($auction->getImages() as $image) {
+                 ftp_delete($conId, self::SERVER_DESTINATION.basename($image->getFilename()));
+                 $entityManager->remove($image);
+             }
+
             $entityManager->remove($auction);
             $entityManager->flush();
         }
