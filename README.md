@@ -60,6 +60,32 @@ Opis instalacji projektu:
 11. W tej samej konsoli wpisać “/etc/init.d/apache2 restart”.
 12. Wejść dodać vhosta w głównym systemie. W przypadku ubuntu należy otworzyć plik  /etc/hosts z prawami administratora. W tym pliku należy dodać linijkę “127.0.0.1 serwis-ogloszeniowy.local”.
 
+## Interfejs aplikacji
+![](https://github.com/serwis-ogloszeniowy/serwis-ogloszeniowy/blob/master/doc_images/Screenshot%20from%202019-12-17%2012-44-48.png)
+
+![](https://github.com/serwis-ogloszeniowy/serwis-ogloszeniowy/blob/master/doc_images/Screenshot%20from%202019-12-17%2012-45-04.png)
+
+![](https://github.com/serwis-ogloszeniowy/serwis-ogloszeniowy/blob/master/doc_images/Screenshot%20from%202019-12-17%2012-45-18.png)
+
+
+![](https://github.com/serwis-ogloszeniowy/serwis-ogloszeniowy/blob/master/doc_images/Screenshot%20from%202019-12-17%2012-45-46.png)
+
+![](https://github.com/serwis-ogloszeniowy/serwis-ogloszeniowy/blob/master/doc_images/Screenshot%20from%202019-12-17%2012-46-03.png)
+
+![](https://github.com/serwis-ogloszeniowy/serwis-ogloszeniowy/blob/master/doc_images/Screenshot%20from%202019-12-17%2012-46-58.png)
+
+![](https://github.com/serwis-ogloszeniowy/serwis-ogloszeniowy/blob/master/doc_images/Screenshot%20from%202019-12-17%2012-47-34.png)
+
+![](https://github.com/serwis-ogloszeniowy/serwis-ogloszeniowy/blob/master/doc_images/Screenshot%20from%202019-12-17%2012-48-21.png)
+
+![](https://github.com/serwis-ogloszeniowy/serwis-ogloszeniowy/blob/master/doc_images/Screenshot%20from%202019-12-17%2012-48-37.png)
+
+![](https://github.com/serwis-ogloszeniowy/serwis-ogloszeniowy/blob/master/doc_images/Screenshot%20from%202019-12-17%2012-44-48.png)
+![](https://github.com/serwis-ogloszeniowy/serwis-ogloszeniowy/blob/master/doc_images/Screenshot%20from%202019-12-17%2012-47-49.png)
+
+![](https://github.com/serwis-ogloszeniowy/serwis-ogloszeniowy/blob/master/doc_images/Screenshot%20from%202019-12-17%2012-48-01.png)
+
+
 ## Schematy UML
 ### Diagram przypadków użycia:
 ![](https://github.com/serwis-ogloszeniowy/serwis-ogloszeniowy/blob/master/doc_images/5.PNG)
